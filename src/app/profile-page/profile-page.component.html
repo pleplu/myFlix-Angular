@@ -1,0 +1,49 @@
+<mat-toolbar>
+  <h1 style="font-size: 48px; font-weight: 500; margin-left: 10px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">myFlix</h1>
+  <button mat-raised-button (click)="toMovies()" color="primary" style="font-size: 24px; margin-left: 20px;">
+    Home
+  </button>
+  <button mat-raised-button (click)="logOut()" color="primary" style="font-size: 24px; margin-left: 10px;">
+    Logout
+  </button>
+</mat-toolbar>
+
+<div style="padding:20px">
+  <div>
+    <div style="margin-bottom: 40px;">
+      <form>
+        <h1>Update Information</h1>
+        <mat-form-field style="margin-right: 10px;">
+          <input matInput [(ngModel)]="userData.Username" placeholder="Username" name="Username" required>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <input matInput [(ngModel)]="userData.Password" placeholder="Password" name="Password" required>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <input matInput [(ngModel)]="userData.Email" type="email" placeholder="Email" name="Email" required>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <input matInput [(ngModel)]="userData.Birthday" type="date" placeholder="Birthday" name="Birthday" required>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button (click)="editUser()" color="primary" style="margin-right: 10px;">
+        Update
+      </button>
+
+      <button mat-raised-button (click)="deleteUser()" style="background-color: crimson; color: white;">
+        Delete Account
+      </button>
+    </div>
+
+  <h1>Favorite Movies</h1>
+  <div style="display: flex;">
+    <mat-card *ngFor="let movie of favoriteMovies" style="margin-right: 20px;">
+      <mat-card-title style="margin: 5px;">{{movie.Title}}</mat-card-title>
+      <mat-card-subtitle style="margin: 5px;">{{movie.Director.Name}}</mat-card-subtitle>
+      <img src="{{movie.ImagePath}}" style="width: 350px; height: 490px;" />
+    </mat-card>
+  </div>
+</div>
