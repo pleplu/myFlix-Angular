@@ -30,7 +30,12 @@ export class UserLoginFormComponent {
   ngOnInit(): void {
   }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * This function invokes the userLogin function and returns a user and token then navigates to the movies page
+   * @param userData
+   * @returns user
+   * @returns token
+   */
   loginUser(): void {
       this.fetchApiData.userLogin(this.userData).subscribe((response) => {
       localStorage.setItem('user', JSON.stringify(response.user));

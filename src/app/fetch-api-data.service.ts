@@ -19,7 +19,10 @@ export class FetchApiDataService {
 
   }
 
-  // API call for the user registration endpoint
+  /**
+   * This function sends user details to the users endpoint of the API to register a new user
+   * @param userData
+   */
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
@@ -27,7 +30,10 @@ export class FetchApiDataService {
     );
   }
 
-  // API call for the user login endpoint
+  /**
+   * This function sends user details to the login endpoint of the API
+   * @param loginDetails
+   */
   public userLogin(loginDetails: any): Observable<any> {
     return this.http.post(apiUrl + 'login', loginDetails).pipe(
     catchError(this.handleError)
@@ -36,7 +42,11 @@ export class FetchApiDataService {
 
 // --------------------------------------------------------------------------------------------------------------------------
 
-  // API call for the movies endpoint
+  /**
+   * This function returns the movies endpoint after receiving a valid token 
+   * @param token
+   * @returns movies 
+   */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
@@ -50,7 +60,12 @@ export class FetchApiDataService {
 
 // --------------------------------------------------------------------------------------------------------------------------
 
-  // Adds movie to users favorite movies list
+  /**
+   * This function adds a movie to a users array of favorite movies
+   * @param user
+   * @param token
+   * @param MovieID 
+   */
   addFavoriteMovie(MovieID: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
@@ -68,13 +83,21 @@ export class FetchApiDataService {
     );
   }
 
+
+  /**
+   * This function checks if a movie is already added to the users array of favorite movies
+   * @param MovieID 
+   */
   isFavoriteMovie(MovieID: string): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user.FavoriteMovies.indexOf(MovieID) >= 0;
   }
 
 
-  // Removies movie from users favorite movies list
+  /**
+   * This function removes a movie from a users list of favorite movies
+   * @param MovieID 
+   */
   deleteFavoriteMovie(MovieID: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
@@ -95,13 +118,20 @@ export class FetchApiDataService {
 
 // --------------------------------------------------------------------------------------------------------------------------
 
-  // Returns a specific user
+  /**
+   * This function returns an already logged in user when invoked
+   * @returns user
+   */
   getUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user;
   }
 
-  // Allows user to edit user information
+  /**
+   * This function allows a registered user to edit their information
+   * @param user
+   * @param token
+   */
   editUser(updatedUser: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
@@ -116,7 +146,11 @@ export class FetchApiDataService {
     );
   }
 
-  // Deletes user from database
+  /**
+   * This function deletes a user from the database
+   * @param user
+   * @param token
+   */
   deleteUser(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');

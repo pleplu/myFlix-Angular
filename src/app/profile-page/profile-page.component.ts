@@ -28,6 +28,14 @@ export class ProfilePageComponent implements OnInit {
     this.getUser();
   }
 
+  /**
+   * This function invokes the getUser function and returns user data
+   * @returns user.Username
+   * @returns user.Password
+   * @returns user.Email
+   * @returns user.Birthday
+   * @returns user.FavoriteMovies
+   */
   getUser(): void {
     this.user = this.fetchApiData.getUser();
     this.userData.Username = this.user.Username;
@@ -39,6 +47,9 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  /**
+   * This function invokes the editUser function
+   */
   editUser(): void {
     this.fetchApiData.editUser(this.userData).subscribe((result) => {
       localStorage.setItem('user', JSON.stringify(result));
@@ -48,6 +59,9 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  /**
+   * This function invokes the deleteUser function
+   */
   deleteUser(): void {
     this.fetchApiData.deleteUser().subscribe(() => {
       localStorage.clear();
@@ -55,10 +69,16 @@ export class ProfilePageComponent implements OnInit {
     })
   }
 
+  /**
+   * This function navigates the user to the movies page
+   */
   toMovies(): void {
     this.router.navigate(['movies']);
   }
 
+  /**
+   * This function allows a user to logout, clearing local storage, and returning the user to the welcome page
+   */
   logOut(): void {
     this.router.navigate(['welcome']);
     localStorage.clear();
